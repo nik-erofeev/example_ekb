@@ -1,0 +1,11 @@
+poetry
+fastapi
+sqlalchemy
+uvicorn
+alembic
+pydantic-settings
+asyncpg
+pydantic[email]
+greenlet
+pip-tools
+pre-commit
