@@ -1,8 +1,8 @@
 """init migrations
 
-Revision ID: 6b6da5c16d70
+Revision ID: 65190bf9c816
 Revises: 
-Create Date: 2024-02-08 15:51:25.127630
+Create Date: 2024-02-08 20:06:17.405600
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6b6da5c16d70'
+revision = '65190bf9c816'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,16 +21,16 @@ def upgrade() -> None:
     op.create_table('shift_tasks',
     sa.Column('status_closed', sa.Boolean(), server_default=sa.text('false'), nullable=False),
     sa.Column('task_shift', sa.String(length=100), nullable=False),
-    sa.Column('line', sa.String(length=10), nullable=False),
-    sa.Column('shift', sa.String(length=32), nullable=False),
-    sa.Column('brigade', sa.String(length=20), nullable=False),
+    sa.Column('line', sa.String(length=100), nullable=False),
+    sa.Column('shift', sa.String(length=100), nullable=False),
+    sa.Column('brigade', sa.String(length=100), nullable=False),
     sa.Column('batch_number', sa.Integer(), nullable=False),
     sa.Column('batch_date', sa.Date(), nullable=False),
-    sa.Column('nomenclature', sa.String(length=20), nullable=False),
+    sa.Column('nomenclature', sa.String(length=255), nullable=False),
     sa.Column('ecn_code', sa.String(length=6), nullable=False),
     sa.Column('rc_identifier', sa.String(length=10), nullable=False),
-    sa.Column('date_started_shift', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.Column('date_end_shift', sa.DateTime(), nullable=False),
+    sa.Column('date_started_shift', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('date_end_shift', sa.DateTime(timezone=True), nullable=False),
     sa.Column('closed_at', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.PrimaryKeyConstraint('id'),

@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+from typing import Annotated
 
+from fastapi import Depends
 from pydantic import BaseModel
 
 from app.api.common.repository import BaseRepository
@@ -9,6 +11,40 @@ from app.database import SessionDep
 
 class AbstractBaseService(ABC):
     repository: type[BaseRepository]
+
+    @classmethod
+    def _dep_get(cls, func):
+        return Annotated[cls.repository.model, Depends(func)]
+
+    @classmethod
+    @property
+    def get_many_dep(cls):
+        return cls._dep_get(cls.get_many)
+
+    @classmethod
+    @property
+    def get_many_query_dep(cls):
+        return cls._dep_get(cls.get_many_query)
+
+    @classmethod
+    @property
+    def get_dep(cls):
+        return cls._dep_get(cls.get)
+
+    @classmethod
+    @property
+    def create_dep(cls):
+        return cls._dep_get(cls.create)
+
+    @classmethod
+    @property
+    def edit_dep(cls):
+        return cls._dep_get(cls.edit)
+
+    @classmethod
+    @property
+    def delete_dep(cls):
+        return cls._dep_get(cls.delete)
 
     @classmethod
     @abstractmethod
