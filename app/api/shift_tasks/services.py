@@ -47,11 +47,14 @@ class ShiftTaskService(BaseService):
             exist_task = result_task.scalar_one_or_none()
 
             if exist_task is None:
-                insert_shift_task = cls.repository.insert(data)
-                result = await session.scalars(insert_shift_task)
-                await session.flush()
+                try:
+                    insert_shift_task = cls.repository.insert(data)
+                    result = await session.scalars(insert_shift_task)
+                    await session.flush()
 
-                list_task.append(result.one())
+                    list_task.append(result.one())
+                except IntegrityError:
+                    raise http_data_conflict_exception
 
             else:
 

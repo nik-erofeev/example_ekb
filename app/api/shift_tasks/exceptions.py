@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 
 http_data_conflict_exception = HTTPException(
     status_code=status.HTTP_409_CONFLICT,
-    detail="Пользователь с такой партией уже существует",
+    detail="Пользователь с такой партией/датой уже существует",
 )
 
 

@@ -1,7 +1,7 @@
 from datetime import date, datetime
 
 from sqlalchemy import DateTime, false, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app import models
 from app.database import Base
@@ -22,6 +22,7 @@ class ShiftTask(Base, models.IdMixin):
     batch_number: Mapped[int] = mapped_column(nullable=False, unique=True)
     batch_date: Mapped[date] = mapped_column(
         nullable=False,
+        unique=True
     )
     nomenclature: Mapped[str] = mapped_column(String(255), nullable=False)
     ecn_code: Mapped[str] = mapped_column(String(6), nullable=False)
