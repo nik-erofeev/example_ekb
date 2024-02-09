@@ -20,10 +20,7 @@ class ShiftTask(Base, models.IdMixin):
     shift: Mapped[str] = mapped_column(String(100), nullable=False)
     brigade: Mapped[str] = mapped_column(String(100), nullable=False)
     batch_number: Mapped[int] = mapped_column(nullable=False, unique=True)
-    batch_date: Mapped[date] = mapped_column(
-        nullable=False,
-        unique=True
-    )
+    batch_date: Mapped[date] = mapped_column(nullable=False, unique=True)
     nomenclature: Mapped[str] = mapped_column(String(255), nullable=False)
     ecn_code: Mapped[str] = mapped_column(String(6), nullable=False)
     rc_identifier: Mapped[str] = mapped_column(String(10), nullable=False)
@@ -40,6 +37,10 @@ class ShiftTask(Base, models.IdMixin):
     closed_at: Mapped[datetime | None] = mapped_column(
         nullable=True,
         default=None,
+    )
+
+    codes: Mapped[list["models.code.Code"]] = relationship(
+        back_populates="shift_task",
     )
 
     def close(self):
