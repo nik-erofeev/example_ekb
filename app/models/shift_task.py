@@ -43,6 +43,7 @@ class ShiftTask(Base, models.IdMixin):
     )
 
     def close(self):
-        if not self.status_closed:
-            self.status_closed = True
-            self.closed_at = datetime.now()
+        self.closed_at = datetime.now()
+
+    def open(self):
+        self.closed_at = None

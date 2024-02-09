@@ -53,3 +53,18 @@ class ShiftTaskQueryParams(BaseModel):
     nomenclature: str | None = None
     ecn_code: str | None = None
     rc_identifier: str | None = None
+
+
+class ShiftTaskUpdateSchemas(BaseModel):
+    status_closed: bool | None = None
+    task_shift: str | None = None
+    line: str | None = None
+    shift: str | None = None
+    brigade: str | None = None
+    batch_number: int | None = None
+    batch_date: date | None = None
+    nomenclature: str | None = None
+    ecn_code: str | None = None
+    rc_identifier: str | None = None
+    date_started_shift: datetime | None = None
+    date_end_shift: datetime | None = None
