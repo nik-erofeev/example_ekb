@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 
-from app.api.products.schemas import CodeResponseSchemas
-from app.api.products.services import CodeService
+from app.api.codes.schemas import CodeResponseSchemas
+from app.api.codes.services import CodeService
 
 
 router = APIRouter(
