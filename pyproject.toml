@@ -30,16 +30,16 @@ combine_as_imports = true
 combine_star = true
 skip_gitignore = true
 balanced_wrapping = true
-skip = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', '*/docker/*',]
+skip = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', '*/docker/*','app/models/__init__.py',]
 
 
 [tool.black]
 line-length = 80
 skip-string-normalization = true
-exclude = ['.git', '__pycache__', '*.yml.enc', '*/docker/*',]
+exclude = ['.git', '__pycache__', '*.yml.enc', '*/docker/*', 'app/models/__init__.py']
 
 [tool.flake8]
 max-line-length = 80
-exclude = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json','*/docker/*', 'prometheus.yml']
+exclude = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json','*/docker/*', 'prometheus.yml','app/models/__init__.py']
 
 

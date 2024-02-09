@@ -41,7 +41,7 @@ class ShiftTaskService(BaseService):
                 data = data.model_dump(by_alias=True)
 
             search_task = cls.repository.search(
-                batch_number=data['batch_number'],
+                batch_number=data["batch_number"],
             )
             result_task = await session.execute(search_task)
             exist_task = result_task.scalar_one_or_none()
