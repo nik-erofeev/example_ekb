@@ -13,7 +13,7 @@ router = APIRouter(
 @router.post(
     "/",
     status_code=status.HTTP_201_CREATED,
-    response_model=ShiftTaskResponseSchemas,
+    response_model=list[ShiftTaskResponseSchemas],
 )
 async def create_shift_tasks(task: ShiftTaskService.create_dep):
     return task

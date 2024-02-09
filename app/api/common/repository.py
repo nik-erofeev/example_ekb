@@ -17,9 +17,6 @@ class BaseSearchMixin(ABC):
 
         select = sqlalchemy.select(cls.model).filter_by(**kwargs)
 
-        if hasattr(cls.model, "is_deleted"):
-            return select.filter_by(is_deleted=False)
-
         return select
 
 

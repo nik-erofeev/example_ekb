@@ -26,26 +26,42 @@ class ShiftTaskService(BaseService):
     @classmethod
     async def create(
         cls,
-        data: ShiftTaskCreateSchemas,
+        data_list: list[ShiftTaskCreateSchemas],
         session: SessionDep,
-    ) -> ShiftTask:
+    ) -> list[ShiftTask]:
 
-        if data.status_closed:
-            data = data.model_dump(by_alias=True)
-            data["closed_at"] = datetime.now()
-        else:
-            data = data.model_dump(by_alias=True)
+        list_task = []
 
-        insert = cls.repository.insert(data)
+        for data in data_list:
 
-        try:
-            result = await session.scalars(insert)
-            await session.flush()
+            if data.status_closed:
+                data = data.model_dump(by_alias=True)
+                data["closed_at"] = datetime.now()
+            else:
+                data = data.model_dump(by_alias=True)
 
-        except IntegrityError:
-            raise http_data_conflict_exception
+            search_task = cls.repository.search(
+                batch_number=data['batch_number'],
+            )
+            result_task = await session.execute(search_task)
+            exist_task = result_task.scalar_one_or_none()
 
-        return result.one()
+            if exist_task is None:
+                insert_shift_task = cls.repository.insert(data)
+                result = await session.scalars(insert_shift_task)
+                await session.flush()
+
+                list_task.append(result.one())
+
+            else:
+
+                update_shift_task = cls.repository.update(exist_task.id, data)
+                result = await session.scalars(update_shift_task)
+                await session.flush()
+
+                list_task.append(result.one())
+
+        return list_task
 
     @classmethod
     async def get(
