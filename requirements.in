@@ -9,5 +9,4 @@ pydantic[email]
 greenlet
 pip-tools
 pre-commit
-
 flake8
