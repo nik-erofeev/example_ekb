@@ -22,10 +22,11 @@ services:
 
   #Сервис FastAPI
   fastapi_example:
-    container_name: "fastapi_example"
     build:
       context: .
       dockerfile: Dockerfile
+    image: ekb-example-image-name:latest   # Здесь указываем желаемое имя образа
+    container_name: "fastapi_example"
     restart: unless-stopped
 #    command: bash -c "alembic upgrade heads && app.main:app --host 0.0.0.0 --port 8000 --reload"
     command: [ "/app_example/docker/app.sh" ]
