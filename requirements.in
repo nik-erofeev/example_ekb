@@ -9,3 +9,4 @@ pydantic[email]
 greenlet
 pip-tools
 pre-commit
+mypy

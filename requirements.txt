@@ -83,6 +83,10 @@ more-itertools==10.2.0
     # via jaraco-classes
 msgpack==1.0.7
     # via cachecontrol
+mypy==1.8.0
+    # via -r requirements.in
+mypy-extensions==1.0.0
+    # via mypy
 nodeenv==1.8.0
     # via pre-commit
 packaging==23.2
@@ -159,6 +163,7 @@ typing-extensions==4.9.0
     # via
     #   alembic
     #   fastapi
+    #   mypy
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
