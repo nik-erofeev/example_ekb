@@ -1,4 +1,5 @@
 """Модуль работы с Базой Данных"""
+
 import contextlib
 from collections.abc import AsyncGenerator
 from typing import Annotated
