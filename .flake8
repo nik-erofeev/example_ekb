@@ -1,0 +1,6 @@
+[flake8]
+ignore = E501,E402
+max-line-length = 80
+exclude = .git,__pycache__,*.yml.enc,*/migrations/*,*/docker/*,app/models/__init__.py,*/tests/*
+
+

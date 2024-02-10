@@ -1,11 +1,10 @@
 import asyncio
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-
-from alembic import context
 
 
 # this is the Alembic Config object, which provides
@@ -13,6 +12,7 @@ from alembic import context
 config = context.config
 
 from app.config import settings
+
 
 section = config.config_ini_section
 config.set_section_option(section, "DB_URL", settings.database_url)
@@ -28,6 +28,8 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from app.models import Base
+
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,

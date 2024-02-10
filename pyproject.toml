@@ -7,6 +7,19 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pre-commit= "^3.3.3"
+flake8 = "^7.0.0"
+black= "^24.1.1"
+isort= "^5.13.2"
+pytest-asyncio= "^0.23.5"
+pytest = "^8.0.0"
+httpx= "^0.26.0"
+sqlalchemy = "^2.0.25"
+python-dotenv= "^1.0.1"
+pydantic-settings= "^2.1.0"
+pydantic-core= "^2.16.2"
+fastapi="^0.109.2"
+asyncpg= "^0.29.0"
 
 
 [build-system]
@@ -30,16 +43,44 @@ combine_as_imports = true
 combine_star = true
 skip_gitignore = true
 balanced_wrapping = true
-skip = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', '*/docker/*','app/models/__init__.py',]
+skip = ['.git',
+    '__pycache__',
+    '*.yml.enc',
+    '*/migrations/*',
+    '*/docker/*',
+    'app/models/__init__.py',
+    '*/venv/*',
+    '*/env/*',
+    '*/tests/*',
+]
 
 
 [tool.black]
 line-length = 80
 skip-string-normalization = true
-exclude = ['.git', '__pycache__', '*.yml.enc', '*/docker/*', 'app/models/__init__.py']
+#exclude = ['__init__.py']
+exclude = '''
+\\.git
+|__pycache__
+|\\.yml\\.enc
+|\\*/migrations/\\*
+|\\*/docker/\\*
+|venv
+|env
+|\\*/tests/\\*
+'''
+
+
 
 [tool.flake8]
 max-line-length = 80
-exclude = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json','*/docker/*', 'prometheus.yml','app/models/__init__.py']
-
-
+exclude = '''
+\\.git
+|__pycache__
+|\\.yml\\.enc
+|\\*/migrations/\\*
+|\\*/docker/\\*
+|venv
+|env
+|\\*/tests/\\*
+'''

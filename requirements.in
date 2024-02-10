@@ -8,4 +8,10 @@ asyncpg
 pydantic[email]
 greenlet
 pip-tools
+flake8
 pre-commit
+isort
+pytest-asyncio
+httpx
+
+
