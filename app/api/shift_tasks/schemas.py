@@ -2,6 +2,8 @@ from datetime import date, datetime
 
 from pydantic import BaseModel, Field
 
+from app.api.codes.schemas import CodeResponseSchemas
+
 
 class ShiftTaskBaseSchemas(BaseModel):
     status_closed: bool = Field(..., validation_alias="СтатусЗакрытия")
@@ -44,6 +46,10 @@ class ShiftTaskResponseSchemas(BaseModel):
     date_end_shift: datetime
 
     closed_at: datetime | None
+
+
+class TaskWithCodesResponseSchemas(ShiftTaskResponseSchemas):
+    codes: list[CodeResponseSchemas]
 
 
 class ShiftTaskQueryParams(BaseModel):

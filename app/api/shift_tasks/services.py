@@ -3,6 +3,7 @@ from datetime import datetime
 from fastapi import Depends, HTTPException, status
 from pydantic import conint
 from sqlalchemy.exc import IntegrityError, NoResultFound
+from sqlalchemy.orm import selectinload
 
 from app.api.common.services import BaseService
 from app.api.common.utils import PaginationDep
@@ -76,7 +77,11 @@ class ShiftTaskService(BaseService):
         session: SessionDep,
     ) -> ShiftTask:
         try:
-            return await super().get(task_id, session)
+            select = cls.repository.select(task_id).options(
+                selectinload(ShiftTask.codes),
+            )
+            result = await session.scalars(select)
+            return result.one()
 
         except NoResultFound:
             raise http_not_found_exception
