@@ -5,6 +5,10 @@ from pydantic_settings import BaseSettings
 load_dotenv()
 
 
+
+
+
+
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
     SERVER_HOST: str = "127.0.0.1"
@@ -28,9 +32,16 @@ class Settings(BaseSettings):
                 self.DATABASE_NAME,
             ),
         ):
-            raise ValueError(
-                "Отсутствуют необходимые данные для подключения к БД",
-            )
+
+
+
+
+
+
+            raise ValueError("Отсутствуют необходимые данные для подключения к БД",)
+
+
+
 
         return (
             f"postgresql+asyncpg://"
