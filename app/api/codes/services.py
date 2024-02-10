@@ -1,29 +1,12 @@
-from pydantic import BaseModel
 from sqlalchemy.exc import IntegrityError
 
 from app.api.codes.exceptions import http_code_conflict_exception
 from app.api.codes.repository import CodeRepository
 from app.api.codes.schemas import CodeBaseSchemas, CodeResponseSchemas
 from app.api.common.services import BaseService
-from app.api.shift_tasks.repository import ShiftTaskRepository
+from app.api.shift_tasks.schemas import TaskByButchNumberRequest
+from app.api.shift_tasks.utils import get_task_by_batch_number
 from app.database import SessionDep
-from app.models import ShiftTask
-
-
-class TaskByButchNumberRequest(BaseModel):
-    batch_number: int
-
-
-async def get_task_by_batch_number(
-    task_data: TaskByButchNumberRequest,
-    session: SessionDep,
-) -> ShiftTask | None:
-    search_select = ShiftTaskRepository.search(
-        batch_number=task_data.batch_number,
-    )
-    result = await session.execute(search_select)
-
-    return result.scalar_one_or_none()
 
 
 class CodeService(BaseService):
