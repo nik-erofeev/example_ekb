@@ -1,9 +1,11 @@
 """Модуль работы с Базой Данных"""
+
 import contextlib
 from collections.abc import AsyncGenerator
 from typing import Annotated
 
 from fastapi import Depends
+from sqlalchemy import NullPool
 from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     AsyncSession,
@@ -14,8 +16,15 @@ from sqlalchemy.orm import DeclarativeBase, declared_attr
 from app.config import settings
 
 
+if settings.MODE == "TEST":
+    DATABASE_URL = settings.database_url_test
+    DATABASE_PARAMS = {"poolclass": NullPool}
+else:
+    DATABASE_URL = settings.database_url
+    DATABASE_PARAMS = {}
+
 engine = create_async_engine(
-    settings.database_url,
+    DATABASE_URL,
     echo=settings.DEBUG,
 )
 

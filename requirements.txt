@@ -69,6 +69,8 @@ idna==3.6
     #   requests
 importlib-metadata==7.0.1
     # via keyring
+iniconfig==2.0.0
+    # via pytest
 installer==0.7.0
     # via poetry
 jaraco-classes==3.3.1
@@ -89,6 +91,7 @@ packaging==23.2
     # via
     #   build
     #   poetry
+    #   pytest
 pexpect==4.9.0
     # via poetry
 pip-tools==7.3.0
@@ -99,6 +102,8 @@ platformdirs==3.11.0
     # via
     #   poetry
     #   virtualenv
+pluggy==1.4.0
+    # via pytest
 poetry==1.7.1
     # via
     #   -r requirements.in
@@ -128,6 +133,10 @@ pyproject-hooks==1.0.0
     # via
     #   build
     #   poetry
+pytest==8.0.0
+    # via pytest-asyncio
+pytest-asyncio==0.23.5
+    # via -r requirements.in
 python-dotenv==1.0.1
     # via pydantic-settings
 pyyaml==6.0.1
