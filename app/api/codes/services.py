@@ -38,8 +38,8 @@ class CodeService(BaseService):
 
             if (shift_task is not None) and (existing_code is None):
                 if (
-                    shift_task.batch_number == data.batch_number
-                    and shift_task.batch_date == data.batch_date
+                    shift_task.batch_number == data.batch_number  # noqa
+                    and shift_task.batch_date == data.batch_date  # noqa
                 ):
 
                     insert_code = cls.repository.insert(
