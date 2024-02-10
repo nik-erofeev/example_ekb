@@ -22,3 +22,7 @@ class CodeResponseSchemas(BaseModel):
     shift_task_id: int
     is_aggregated: bool
     aggregated_at: datetime | None
+
+
+class UniqueCodeSchemas(BaseModel):
+    unique_product_code: str

@@ -17,3 +17,12 @@ router = APIRouter(
 )
 async def create_unique_codes(codes: CodeService.create_dep):
     return codes
+
+
+@router.patch(
+    "/{code_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=CodeResponseSchemas,
+)
+async def aggregated(aggregate: CodeService.aggregate_codes_dep):
+    return aggregate
