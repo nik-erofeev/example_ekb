@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     DATABASE_PORT: str | None = None
     DATABASE_NAME: str | None = None
 
+
+
+
+
     @property
     def database_url(self) -> str:
         if not all(
@@ -28,9 +32,12 @@ class Settings(BaseSettings):
                 self.DATABASE_NAME,
             ),
         ):
-            raise ValueError(
-                "Отсутствуют необходимые данные для подключения к БД",
-            )
+
+
+
+
+
+            raise ValueError("Отсутствуют необходимые данные для подключения к БД",)
 
         return (
             f"postgresql+asyncpg://"
@@ -39,7 +46,6 @@ class Settings(BaseSettings):
         )
 
 
-settings = Settings(
-    _env_file=".env",
-    _env_file_encoding="utf-8",
-)
+
+
+settings = Settings(_env_file=".env",_env_file_encoding="utf-8",)
