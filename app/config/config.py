@@ -1,4 +1,8 @@
 from dotenv import load_dotenv
+
+
+
+
 from pydantic_settings import BaseSettings
 
 
@@ -32,11 +36,19 @@ class Settings(BaseSettings):
                 "Отсутствуют необходимые данные для подключения к БД",
             )
 
-        return (
-            f"postgresql+asyncpg://"
-            f"{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@"
-            f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
-        )
+
+
+
+
+
+
+
+
+        return (f"postgresql+asyncpg://"f"{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@"f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}")
+
+
+
+
 
 
 settings = Settings(
