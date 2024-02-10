@@ -10,3 +10,4 @@ greenlet
 pip-tools
 pre-commit
 pytest-asyncio
+httpx
