@@ -20,23 +20,23 @@ services:
       - custom
 
 
-#  #Сервис FastAPI
-#  fastapi_example:
-#    container_name: "fastapi_example"
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    restart: unless-stopped
-##    command: bash -c "alembic upgrade heads && app.main:app --host 0.0.0.0 --port 8000 --reload"
-#    command: [ "/app_example/docker/app.sh" ]
-#    depends_on:
-#      - postgres
-#    env_file:
-#      - .env
-#    ports:
-#      - "8000:8000"
-#    networks:
-#      - custom
+  #Сервис FastAPI
+  fastapi_example:
+    container_name: "fastapi_example"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+#    command: bash -c "alembic upgrade heads && app.main:app --host 0.0.0.0 --port 8000 --reload"
+    command: [ "/app_example/docker/app.sh" ]
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - custom
 
 
 volumes:
