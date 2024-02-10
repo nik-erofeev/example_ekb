@@ -68,7 +68,3 @@ class ShiftTaskUpdateSchemas(BaseModel):
     rc_identifier: str | None = None
     date_started_shift: datetime | None = None
     date_end_shift: datetime | None = None
-
-
-class TaskByButchNumberRequest(BaseModel):
-    batch_number: int
