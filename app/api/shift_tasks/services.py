@@ -1,13 +1,13 @@
 from datetime import datetime
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
 from pydantic import conint
 from sqlalchemy.exc import IntegrityError, NoResultFound
 
 from app.api.common.services import BaseService
 from app.api.common.utils import PaginationDep
 from app.api.shift_tasks.exceptions import (
-    http_data_conflict_exception,
+    http_date_conflict_exception,
     http_not_found_exception,
 )
 from app.api.shift_tasks.repository import ShiftTaskRepository
@@ -16,6 +16,7 @@ from app.api.shift_tasks.schemas import (
     ShiftTaskQueryParams,
     ShiftTaskUpdateSchemas,
 )
+from app.api.shift_tasks.utils import get_task_by_batch_number
 from app.database import SessionDep
 from app.models import ShiftTask
 
@@ -40,11 +41,10 @@ class ShiftTaskService(BaseService):
             else:
                 data = data.model_dump(by_alias=True)
 
-            search_task = cls.repository.search(
-                batch_number=data["batch_number"],
+            exist_task = await get_task_by_batch_number(
+                data["batch_number"],
+                session,
             )
-            result_task = await session.execute(search_task)
-            exist_task = result_task.scalar_one_or_none()
 
             if exist_task is None:
                 try:
@@ -54,7 +54,10 @@ class ShiftTaskService(BaseService):
 
                     list_task.append(result.one())
                 except IntegrityError:
-                    raise http_data_conflict_exception
+                    raise HTTPException(
+                        status_code=status.HTTP_409_CONFLICT,
+                        detail=f"Не корректные Дата Партии{data['batch_number']}или Номер Партии{data['batch_date']}",  # noqa
+                    )
 
             else:
 
@@ -124,7 +127,7 @@ class ShiftTaskService(BaseService):
                 return result.one()
 
         except IntegrityError:
-            raise http_data_conflict_exception
+            raise http_date_conflict_exception
 
         except NoResultFound:
             raise http_not_found_exception
