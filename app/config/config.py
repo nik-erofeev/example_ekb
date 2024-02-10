@@ -17,20 +17,20 @@ class Settings(BaseSettings):
     DATABASE_PORT: str | None = None
     DATABASE_NAME: str | None = None
 
+
+
+
+
     @property
     def database_url(self) -> str:
-        if not all(
-            (
-                self.DATABASE_USER,
-                self.DATABASE_PASSWORD,
-                self.DATABASE_HOST,
-                self.DATABASE_PORT,
-                self.DATABASE_NAME,
-            ),
-        ):
-            raise ValueError(
-                "Отсутствуют необходимые данные для подключения к БД",
-            )
+        if not all((self.DATABASE_USER,self.DATABASE_PASSWORD,self.DATABASE_HOST, self.DATABASE_PORT,self.DATABASE_NAME,),):
+            raise ValueError("Отсутствуют необходимые данные для подключения к БД",)
+
+
+
+
+
+
 
         return (
             f"postgresql+asyncpg://"
