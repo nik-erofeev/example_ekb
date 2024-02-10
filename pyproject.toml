@@ -12,8 +12,6 @@ flake8 = "^7.0.0"
 black = "^22.1.0"
 pre-commit = "^3.3.3"
 
-dependencies = [ "pre-commit~=3.3.3",]
-
 
 [build-system]
 requires = ["poetry-core"]
