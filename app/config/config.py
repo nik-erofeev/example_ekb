@@ -33,9 +33,9 @@ class Settings(BaseSettings):
             )
 
         return (
-            f"postgresql+asyncpg://"
-            f"{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@"
-            f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"
+            f"postgresql+asyncpg://"  # noqa
+            f"{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@"       # noqa
+            f"{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_NAME}"  #noqa
         )
 
 
