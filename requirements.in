@@ -12,5 +12,4 @@ pre-commit
 flake8
 pre-commit
 
-
 isort
