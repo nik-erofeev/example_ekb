@@ -31,7 +31,7 @@ jobs:
     - name: Run poetry flake8
       run: poetry run flake8 .
     - name: Run isort
-      uses: poetry run isort . --check-only --profile black
+      run: poetry run isort . --check-only --profile black
 
     - uses: pre-commit/action@v3.0.1
 
