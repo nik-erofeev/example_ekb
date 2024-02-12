@@ -26,6 +26,7 @@ else:
 engine = create_async_engine(
     DATABASE_URL,
     echo=settings.DEBUG,
+    **DATABASE_PARAMS,
 )
 
 

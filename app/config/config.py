@@ -49,7 +49,15 @@ class Settings(BaseSettings):
 
     @property
     def database_url_test(self) -> str:
-        if not all((self.TEST_DATABASE_USER,self.TEST_DATABASE_PASSWORD,self.TEST_DATABASE_HOST,self.TEST_DATABASE_PORT,self.TEST_DATABASE_NAME,),):
+        if not all(
+            (
+                self.TEST_DATABASE_USER,
+                self.TEST_DATABASE_PASSWORD,
+                self.TEST_DATABASE_HOST,
+                self.TEST_DATABASE_PORT,
+                self.TEST_DATABASE_NAME,
+            ),
+        ):
             raise ValueError(
                 "Отсутствуют необходимые данные для подключения к БД",
             )
@@ -61,6 +69,7 @@ class Settings(BaseSettings):
         )
 
 
-
-
-settings = Settings(_env_file=".env",_env_file_encoding="utf-8",)
+settings = Settings(
+    _env_file=".env",
+    _env_file_encoding="utf-8",
+)

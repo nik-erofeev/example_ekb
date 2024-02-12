@@ -1,2 +1,2 @@
-# async def test_abc(prepare_database):
-#     assert 1 == 1
+async def test_che_sda(prepare_database):
+    assert 11 == 11

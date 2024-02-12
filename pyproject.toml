@@ -42,6 +42,7 @@ skip = ['.git',
     'app/models/__init__.py',
     '*/venv/*',
     '*/env/*',
+    '*/tests/*',
 ]
 
 
@@ -57,6 +58,7 @@ exclude = '''
 |\\*/docker/\\*
 |venv
 |env
+|\\*/tests/\\*
 '''
 
 
@@ -71,4 +73,5 @@ exclude = '''
 |\\*/docker/\\*
 |venv
 |env
+|\\*/tests/\\*
 '''

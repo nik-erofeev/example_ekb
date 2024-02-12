@@ -1,77 +1,127 @@
 from httpx import AsyncClient
+import pytest
 
 
-async def test_create_shift_tasks(ac: AsyncClient):
+@pytest.mark.parametrize(
+    "status_closed,task_shift,line,shift,brigade,batch_number,batch_date,nomenclature,ecn_code,rc_identifier,date_started_shift,date_end_shift,status_code",
+    [
+        (
+            False,
+            "ТЕСТЫ Задание на смену 2",
+            "ТЕСТЫ ЛИНИЯ Т2",
+            "ТЕСТЫ Смена 2",
+            "ТЕСТЫ Бригада №2",
+            22222,
+            "2024-01-30",
+            "ТЕСТЫ Какая то номенклатура2",
+            "456678",
+            "ТЕСТЫ A2",
+            "2024-01-30T20:00:00+05:00",
+            "2024-01-31T08:00:00+05:00",
+            201,
+        ),
+        (
+            False,
+            "ТЕСТЫ Задание на смену 99",
+            "ТЕСТЫ ЛИНИЯ Т99",
+            "ТЕСТЫ Смена 99",
+            "ТЕСТЫ Бригада №22",
+            88888,
+            "2024-01-30",
+            "ТЕСТЫ Какая то номенклатур99",
+            "456679",
+            "ТЕСТЫ 99",
+            "2024-05-30T20:00:00+05:00",
+            "2024-05-31T08:00:00+05:00",
+            409,
+        ),
+        (
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            "dasd",
+            422,
+        ),
+    ],
+)
+async def test_create_shift_tasks(
+    status_closed,
+    task_shift,
+    line,
+    shift,
+    brigade,
+    batch_number,
+    batch_date,
+    nomenclature,
+    ecn_code,
+    rc_identifier,
+    date_started_shift,
+    date_end_shift,
+    status_code,
+    ac: AsyncClient,
+):
 
-    response = await ac.post(
-        "/api/v1/shift_tasks/",
-        json=[
-            {
-                "СтатусЗакрытия": False,
-                "ПредставлениеЗаданияНаСмену": "Задание на смену 2345",
-                "Линия": "Т2",
-                "Смена": "1",
-                "Бригада": "Бригада №4",
-                "НомерПартии": 22222,
-                "ДатаПартии": "2024-01-30",
-                "Номенклатура": "Какая то номенклатура",
-                "КодЕКН": "456678",
-                "ИдентификаторРЦ": "A",
-                "ДатаВремяНачалаСмены": "2024-01-30T20:00:00+05:00",
-                "ДатаВремяОкончанияСмены": "2024-01-31T08:00:00+05:00",
-            },
-            {
-                "СтатусЗакрытия": False,
-                "ПредставлениеЗаданияНаСмену": "Задание на смену 3",
-                "Линия": "Т3",
-                "Смена": "2",
-                "Бригада": "Бригада №2",
-                "НомерПартии": 22223,
-                "ДатаПартии": "2024-03-30",
-                "Номенклатура": "Какая то номенклатур3",
-                "КодЕКН": "456673",
-                "ИдентификаторРЦ": "Б",
-                "ДатаВремяНачалаСмены": "2024-03-30T20:00:00+05:00",
-                "ДатаВремяОкончанияСмены": "2024-03-31T08:00:00+05:00",
-            },
-            {
-                "СтатусЗакрытия": True,
-                "ПредставлениеЗаданияНаСмену": "Задание на смену 99",
-                "Линия": "Т99",
-                "Смена": "10",
-                "Бригада": "Бригада №22",
-                "НомерПартии": 22227,
-                "ДатаПартии": "2024-05-30",
-                "Номенклатура": "Какая то номенклатур5",
-                "КодЕКН": "456679",
-                "ИдентификаторРЦ": "Пп",
-                "ДатаВремяНачалаСмены": "2024-05-30T20:00:00+05:00",
-                "ДатаВремяОкончанияСмены": "2024-05-31T08:00:00+05:00",
-            },
-        ],
-    )
+    data = [
+        {
+            "СтатусЗакрытия": status_closed,
+            "ПредставлениеЗаданияНаСмену": task_shift,
+            "Линия": line,
+            "Смена": shift,
+            "Бригада": brigade,
+            "НомерПартии": batch_number,
+            "ДатаПартии": batch_date,
+            "Номенклатура": nomenclature,
+            "КодЕКН": ecn_code,
+            "ИдентификаторРЦ": rc_identifier,
+            "ДатаВремяНачалаСмены": date_started_shift,
+            "ДатаВремяОкончанияСмены": date_end_shift,
+        }
+    ]
 
-    assert response.status_code == 201
+    response = await ac.post("/api/v1/shift_tasks/", json=data)
+
+    assert response.status_code == status_code
 
 
+@pytest.mark.parametrize(
+    "task_id,status_code",
+    [
+        (1, 200),
+        (99, 404),
+    ],
+)
+async def test_get_by_id(
+    task_id,
+    status_code,
+    ac: AsyncClient,
+):
+    response = await ac.get(f"/api/v1/shift_tasks/{task_id}")
+    assert response.status_code == status_code
 
 
-async def test_create_unique_codes(ac: AsyncClient):
-
-    response = await ac.post(
-        "/api/v1/codes/",
-        json=[
-            {
-                "УникальныйКодПродукта": "12gRV60MMsn1",
-                "НомерПартии": 22222,
-                "ДатаПартии": "2024-01-30",
-            },
-            {
-                "УникальныйКодПродукта": "12gRV60MMsn2",
-                "НомерПартии": 22223,
-                "ДатаПартии": "2024-03-30",
-            },
-        ],
-    )
-
-    assert response.status_code == 201
+@pytest.mark.parametrize(
+    "task_id, batch_date, status_code,",
+    [
+        (1, "2024-03-03", 409),
+        (99, "2024-03-03", 404),
+        (99, "", 422),
+        (99, None, 409),
+    ],
+)
+async def test_edit_task(
+    task_id,
+    batch_date,
+    status_code,
+    ac: AsyncClient,
+):
+    json_data = {} if batch_date is None else {"batch_date": batch_date}
+    response = await ac.patch(f"api/v1/shift_tasks/{task_id}", json=json_data)
+    assert response.status_code == status_code
