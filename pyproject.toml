@@ -34,16 +34,41 @@ combine_as_imports = true
 combine_star = true
 skip_gitignore = true
 balanced_wrapping = true
-skip = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', '*/docker/*','app/models/__init__.py', ]
+skip = ['.git',
+    '__pycache__',
+    '*.yml.enc',
+    '*/migrations/*',
+    '*/docker/*',
+    'app/models/__init__.py',
+    '*/venv/*',
+    '*/env/*',
+]
 
 
 [tool.black]
 line-length = 80
 skip-string-normalization = true
-exclude = ['.git', '__pycache__', '*.yml.enc',  '*/docker/*', 'app/models/__init__.py', ]
+#exclude = ['__init__.py']
+exclude = '''
+\\.git
+|__pycache__
+|\\.yml\\.enc
+|\\*/migrations/\\*
+|\\*/docker/\\*
+|venv
+|env
+'''
+
+
 
 [tool.flake8]
 max-line-length = 80
-exclude = ['.git', '__pycache__', '*.yml.enc',  '*/migrations/*', '*/docker/*','app/models/__init__.py', ]
-
-
+exclude = '''
+\\.git
+|__pycache__
+|\\.yml\\.enc
+|\\*/migrations/\\*
+|\\*/docker/\\*
+|venv
+|env
+'''
