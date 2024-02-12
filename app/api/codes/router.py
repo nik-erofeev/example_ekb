@@ -20,7 +20,7 @@ async def create_unique_codes(codes: CodeService.create_dep):
 
 
 @router.patch(
-    "/{code_id}",
+    "/",
     status_code=status.HTTP_200_OK,
     response_model=CodeResponseSchemas,
 )
