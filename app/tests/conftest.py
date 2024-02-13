@@ -1,9 +1,11 @@
 import json
+from collections.abc import AsyncGenerator
 from datetime import datetime
 
 import pytest
 from httpx import AsyncClient
 from sqlalchemy import insert
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.database import async_session, engine
@@ -72,3 +74,9 @@ async def prepare_database():
 async def ac():
     async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
         yield ac
+
+
+@pytest.fixture(scope="function")
+async def session_fake() -> AsyncGenerator[AsyncSession, None]:
+    async with async_session() as session:
+        yield session
