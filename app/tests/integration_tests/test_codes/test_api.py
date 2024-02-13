@@ -1,5 +1,5 @@
-from httpx import AsyncClient
 import pytest
+from httpx import AsyncClient
 
 
 @pytest.mark.parametrize(
@@ -22,7 +22,7 @@ async def test_create_unique_codes(
             "НомерПартии": batch_number,
             "ДатаПартии": batch_date,
             "УникальныйКодПродукта": unique_product_code,
-        }
+        },
     ]
     response = await ac.post("/api/v1/codes/", json=data)
     assert response.status_code == status_code

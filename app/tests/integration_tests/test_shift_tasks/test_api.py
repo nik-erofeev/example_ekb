@@ -1,9 +1,9 @@
-from httpx import AsyncClient
 import pytest
+from httpx import AsyncClient
 
 
 @pytest.mark.parametrize(
-    "status_closed,task_shift,line,shift,brigade,batch_number,batch_date,nomenclature,ecn_code,rc_identifier,date_started_shift,date_end_shift,status_code",
+    "status_closed,task_shift,line,shift,brigade,batch_number,batch_date,nomenclature,ecn_code,rc_identifier,date_started_shift,date_end_shift,status_code",  # noqa
     [
         (
             False,
@@ -83,7 +83,7 @@ async def test_create_shift_tasks(
             "ИдентификаторРЦ": rc_identifier,
             "ДатаВремяНачалаСмены": date_started_shift,
             "ДатаВремяОкончанияСмены": date_end_shift,
-        }
+        },
     ]
 
     response = await ac.post("/api/v1/shift_tasks/", json=data)
