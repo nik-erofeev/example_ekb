@@ -11,3 +11,8 @@ http_date_conflict_exception = HTTPException(
     status_code=status.HTTP_409_CONFLICT,
     detail="Не корректные ДатаПартии и Номер Партии",
 )
+
+http_edit_conflict_exception = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail="Данные для обновления не представлены",
+)

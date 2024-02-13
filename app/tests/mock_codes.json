@@ -1,0 +1,50 @@
+[
+    {
+        "unique_product_code": "uniquecode1",
+        "shift_task_id" : 1,
+        "is_aggregated": false,
+        "aggregated_at": null
+
+    },
+    {
+        "unique_product_code": "uniquecode11",
+        "shift_task_id" : 1,
+        "is_aggregated": false,
+        "aggregated_at": null
+
+    },
+    {
+        "unique_product_code": "uniquecode111",
+        "shift_task_id" : 1,
+        "is_aggregated": false,
+        "aggregated_at": null
+
+    },
+    {
+        "unique_product_code": "uniquecode2",
+        "shift_task_id" : 2,
+        "is_aggregated": false,
+        "aggregated_at": null
+
+    },{
+        "unique_product_code": "uniquecode3",
+        "shift_task_id" : 3,
+        "is_aggregated": false,
+        "aggregated_at": null
+
+    },
+    {
+        "unique_product_code": "uniquecode4",
+        "shift_task_id" : 4,
+        "is_aggregated": true,
+        "aggregated_at": "2024-11-11T08:00:00"
+
+    },
+    {
+        "unique_product_code": "uniquecode5",
+        "shift_task_id" : 5,
+        "is_aggregated": true,
+        "aggregated_at": "2024-10-10T08:00:00"
+
+    }
+]

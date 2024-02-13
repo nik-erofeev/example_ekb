@@ -9,6 +9,7 @@ from app.api.common.services import BaseService
 from app.api.common.utils import PaginationDep
 from app.api.shift_tasks.exceptions import (
     http_date_conflict_exception,
+    http_edit_conflict_exception,
     http_not_found_exception,
 )
 from app.api.shift_tasks.repository import ShiftTaskRepository
@@ -109,6 +110,8 @@ class ShiftTaskService(BaseService):
     ) -> ShiftTask:
 
         try:
+            if not data.model_dump(exclude_unset=True):
+                raise http_edit_conflict_exception
 
             if data.status_closed is None:
                 return await super().edit(task_id, data, session)
