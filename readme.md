@@ -38,6 +38,10 @@ $ pip install -r requirements.txt
 $ alembic upgrade head
 ```
 
+#### Запусить тесты [alembic](https://alembic.sqlalchemy.org/en/latest/):
+```sh
+$ poetry run pytest
+```
 
 #### Запустить приложение с помощью [uvicorn](https://www.uvicorn.org/):
 ```sh

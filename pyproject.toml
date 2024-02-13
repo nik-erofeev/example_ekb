@@ -11,6 +11,15 @@ pre-commit= "^3.3.3"
 flake8 = "^7.0.0"
 black= "^24.1.1"
 isort= "^5.13.2"
+pytest-asyncio= "^0.23.5"
+pytest = "^8.0.0"
+httpx= "^0.26.0"
+sqlalchemy = "^2.0.25"
+python-dotenv= "^1.0.1"
+pydantic-settings= "^2.1.0"
+pydantic-core= "^2.16.2"
+fastapi="^0.109.2"
+asyncpg= "^0.29.0"
 
 
 [build-system]
