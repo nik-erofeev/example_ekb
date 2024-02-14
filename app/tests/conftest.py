@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 from httpx import AsyncClient
-from sqlalchemy import insert
+from sqlalchemy import insert, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
@@ -68,6 +68,11 @@ async def prepare_database():
         await session.execute(add_codes)
 
         await session.commit()
+
+    yield
+
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
 
 
 @pytest.fixture(scope="function")
