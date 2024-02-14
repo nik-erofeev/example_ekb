@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 from httpx import AsyncClient
-from sqlalchemy import insert, delete
+from sqlalchemy import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
