@@ -69,6 +69,11 @@ async def prepare_database():
 
         await session.commit()
 
+    yield
+
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+
 
 @pytest.fixture(scope="function")
 async def ac():
